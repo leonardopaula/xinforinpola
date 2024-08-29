@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -21,6 +23,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'document',
+        'type_id',
     ];
 
     /**
@@ -30,7 +34,6 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
     ];
 
     /**
@@ -39,7 +42,38 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * Get user's type
+     */
+    public function type(): BelongsTo
+    {
+        return $this->belongsTo(UserType::class);
+    }
+
+    /**
+     * Get user's wallet
+     */
+    public function wallet(): HasOne
+    {
+        return $this->hasOne(Wallet::class);
+    }
+
+    /**
+     * Get payments
+     */
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Transaction::class, 'payer_id');
+    }
+
+    /**
+     * Get receipts
+     */
+    public function receipts(): HasMany
+    {
+        return $this->hasMany(Transaction::class, 'payee_id');
+    }
 }

@@ -26,7 +26,7 @@ class WalletsSeeder extends Seeder
         foreach ($users as $user) {
             $wallets->push([
                 'user_id' => $user->id,
-                'balance' => 0,
+                'balance' => 1000 * 100,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ]);
