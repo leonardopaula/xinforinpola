@@ -16,3 +16,5 @@ use App\Http\Controllers\TransferController;
 */
 
 Route::post('/transfer', [TransferController::class, 'transfer']);
+
+Route::delete('/clear-cache', [TransferController::class, 'clearCache']);
