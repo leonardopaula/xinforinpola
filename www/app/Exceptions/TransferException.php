@@ -36,10 +36,10 @@ class TransferException extends Exception
      */
     public function render()
     {
-        return new HttpResponseException(response()->json([
+        return response()->json([
             'success' => false,
             'message' => $this->message,
             'code' => $this->code,
-        ], $this->httpCode));
+        ], $this->httpCode);
     }
 }

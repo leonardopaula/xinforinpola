@@ -16,9 +16,9 @@ class TypeOperation extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'type_id',
-        'send',
-        'receive',
+        'payer_type_id',
+        'payee_type_id',
+        'enabled',
     ];
 
     /**
@@ -27,14 +27,21 @@ class TypeOperation extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'send' => 'boolean',
-        'receive' => 'boolean',
+        'enabled' => 'boolean',
     ];
 
     /**
      * Get users of type
      */
-    public function type(): BelongsTo
+    public function payerType(): BelongsTo
+    {
+        return $this->belongsToy(UserType::class);
+    }
+
+    /**
+     * Get users of type
+     */
+    public function payeeType(): BelongsTo
     {
         return $this->belongsToy(UserType::class);
     }

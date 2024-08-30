@@ -19,19 +19,34 @@ class TypesOperationsSeeder extends Seeder
         $timestamps = Carbon::now()->format('Y-m-d H:i:s');
         DB::table($this->table)->insert([
             [
-                'type_id' => 1,
-                'send' => true,
-                'receive' => true,
+                'payer_type_id' => 1,
+                'payee_type_id' => 1,
+                'enabled' => true,
                 'created_at' => $timestamps,
                 'updated_at' => $timestamps,
             ],
             [
-                'type_id' => 2,
-                'send' => false,
-                'receive' => true,
+                'payer_type_id' => 1,
+                'payee_type_id' => 2,
+                'enabled' => true,
                 'created_at' => $timestamps,
                 'updated_at' => $timestamps,
-            ]
+            ],
+
+            [
+                'payer_type_id' => 2,
+                'payee_type_id' => 1,
+                'enabled' => false,
+                'created_at' => $timestamps,
+                'updated_at' => $timestamps,
+            ],
+            [
+                'payer_type_id' => 2,
+                'payee_type_id' => 2,
+                'enabled' => false,
+                'created_at' => $timestamps,
+                'updated_at' => $timestamps,
+            ],
         ]);
     }
 }

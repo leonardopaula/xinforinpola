@@ -29,22 +29,22 @@ class Transaction extends Model
     /**
      * Transform value to persist/retrive
      */
-    protected function payer_balance(): Attribute
+    protected function payerBalance(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => $value / 100,
-            set: fn ($value) => round($value, 2) * 100,
+            get: fn($value) => $value / 100,
+            set: fn($value) => round($value, 2) * 100,
         );
     }
 
     /**
      * Transform value to persist/retrive
      */
-    protected function payee_balance(): Attribute
+    protected function payeeBalance(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => $value / 100,
-            set: fn ($value) => round($value, 2) * 100,
+            get: fn($value) => $value / 100,
+            set: fn($value) => round($value, 2) * 100,
         );
     }
 
@@ -54,8 +54,8 @@ class Transaction extends Model
     protected function value(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => $value / 100,
-            set: fn ($value) => round($value, 2) * 100,
+            get: fn($value) => $value / 100,
+            set: fn($value) => round($value, 2) * 100,
         );
     }
 
