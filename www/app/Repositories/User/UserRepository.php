@@ -13,6 +13,12 @@ class UserRepository implements UserRepositoryInterface
         $this->user = $model;
     }
 
+    /**
+     * Returns user by id
+     *
+     * @param integer $id
+     * @return User
+     */
     public function find(int $id)
     {
         return $this->user->find($id);

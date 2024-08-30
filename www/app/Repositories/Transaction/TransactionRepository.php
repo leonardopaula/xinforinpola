@@ -18,6 +18,14 @@ class TransactionRepository implements TransactionRepositoryInterface
         $this->transaction = $transaction;
     }
 
+    /**
+     * Create a transactions without persist on database
+     *
+     * @param Wallet $walletPayer
+     * @param Wallet $walletPayee
+     * @param float $value
+     * @return Transaction
+     */
     public function create(Wallet $walletPayer, Wallet $walletPayee, float $value): Transaction
     {
         $this->transaction->fill([
@@ -31,15 +39,25 @@ class TransactionRepository implements TransactionRepositoryInterface
         return $this->transaction;
     }
 
+    /**
+     * Fail transaction and persist
+     *
+     * @param ErrorCodes $errorCode
+     * @return void
+     */
     public function fail(ErrorCodes $errorCode)
     {
-
         $errorInfo = $errorCode->info();
         $this->transaction->success = false;
         $this->transaction->message = $errorInfo['message'];
         $this->transaction->save();
     }
 
+    /**
+     * Persist success transaction on database
+     *
+     * @return Transaction
+     */
     public function success()
     {
         $this->transaction->success = true;

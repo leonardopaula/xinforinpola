@@ -17,6 +17,12 @@ class TransferController extends Controller
         $this->transferService = $transferService;
     }
 
+    /**
+     * Start the transaction
+     *
+     * @param TransferPostRequest $request
+     * @return void
+     */
     public function transfer(TransferPostRequest $request)
     {
         try {
@@ -35,6 +41,11 @@ class TransferController extends Controller
         ], Response::HTTP_OK);
     }
 
+    /**
+     * Utility to clear cache
+     *
+     * @return void
+     */
     public function clearCache()
     {
         Cache::forget(config('transfer.type_operation_cache_key'));

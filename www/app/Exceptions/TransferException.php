@@ -14,6 +14,11 @@ class TransferException extends Exception
     protected $message;
     protected $httpCode;
 
+    /**
+     * Breaks errors info into variables
+     *
+     * @param ErrorCodes $errorCode
+     */
     public function __construct(ErrorCodes $errorCode)
     {
         $errorInfo = $errorCode->info();

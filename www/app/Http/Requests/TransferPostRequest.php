@@ -31,6 +31,12 @@ class TransferPostRequest extends FormRequest
         ];
     }
 
+    /**
+     * Dispatch error on fail validation
+     *
+     * @param Validator $validator
+     * @return void
+     */
     public function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json([

@@ -7,7 +7,6 @@ use App\Exceptions\TransferException;
 use App\Models\User;
 use App\Repositories\TypeOperations\TypeOperationsRepository;
 use Exception;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Http;
 
 class TransferAuthService
@@ -20,6 +19,13 @@ class TransferAuthService
         $this->typeOperations = $typeOperations;
     }
 
+    /**
+     * Check if is a valid transaction
+     *
+     * @param User $payer
+     * @param User $payee
+     * @return boolean
+     */
     public function canExecuteAction(User $payer, User $payee): bool
     {
         $operations = $this->typeOperations->find($payer->type_id, $payee->type_id);
@@ -35,6 +41,11 @@ class TransferAuthService
         return true;
     }
 
+    /**
+     * Authorize request with remote service
+     *
+     * @return boolean
+     */
     public function hasAuthorization(): bool
     {
         try {

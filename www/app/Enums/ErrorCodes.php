@@ -16,11 +16,22 @@ enum ErrorCodes: int
     case TRANSACTION_PAYEE_WALLET_NOT_FOUND = 10008;
     case TRANSACTION_INSUFFICIENT_BALANCE = 10009;
 
+    /**
+     * Returns error info (message and http code)
+     *
+     * @return array
+     */
     public function info(): array
     {
         return static::getInfo($this);
     }
 
+    /**
+     * Returns statically error info (message and http code)
+     *
+     * @param self $value
+     * @return array
+     */
     public static function getInfo(self $value): array
     {
         return match ($value) {

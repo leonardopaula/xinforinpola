@@ -25,6 +25,12 @@ class TransferService
         $this->transactionService = $transactionService;
     }
 
+    /**
+     * Controls transaction flow
+     *
+     * @param TransferPostRequest $request
+     * @return boolean
+     */
     public function dispatchTransaction(TransferPostRequest $request): bool
     {
         $payer = $this->userRepository->find($request->input('payer'));
@@ -46,6 +52,14 @@ class TransferService
         return false;
     }
 
+    /**
+     * Check authorization with remote service
+     *
+     * @param User $payer
+     * @param User $payee
+     * @param float $value
+     * @return boolean
+     */
     private function authorizeTransaction(User $payer, User $payee, float $value): bool
     {
         return $this->authService->hasAuthorization();

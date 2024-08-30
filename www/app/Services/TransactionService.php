@@ -21,6 +21,14 @@ class TransactionService
         $this->walletRepository = $walletRepository;
     }
 
+    /**
+     * Effectively executes the transaction and log
+     *
+     * @param User $payer
+     * @param User $payee
+     * @param float $value
+     * @return void
+     */
     public function executeTransaction(User $payer, User $payee, float $value)
     {
         $error = null;

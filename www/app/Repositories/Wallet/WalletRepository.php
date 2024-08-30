@@ -13,6 +13,13 @@ class WalletRepository implements WalletRepositoryInterface
         $this->wallet = $model;
     }
 
+    /**
+     * Get user's wallet (locking if need)
+     *
+     * @param integer $userId
+     * @param boolean $lock
+     * @return Wallet
+     */
     public function getWallet(int $userId, $lock = false)
     {
         $balanceQuery = $this->wallet->where('user_id', $userId);

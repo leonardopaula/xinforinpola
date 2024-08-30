@@ -3,6 +3,8 @@
 namespace App\Repositories\TypeOperations;
 
 use App\Models\TypeOperation;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection as SupportCollection;
 use Illuminate\Support\Facades\Cache;
 
 class TypeOperationsRepository implements TypeOperationsRepositoryInterface
@@ -14,6 +16,13 @@ class TypeOperationsRepository implements TypeOperationsRepositoryInterface
         $this->typeOperations = $typeOperations;
     }
 
+    /**
+     * Find configuration of transaction using cache
+     *
+     * @param integer $payer_type
+     * @param integer $payee_type
+     * @return SupportCollection
+     */
     public function find(int $payer_type, int $payee_type)
     {
         $types = Cache::rememberForever(

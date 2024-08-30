@@ -9,7 +9,14 @@ use Illuminate\Support\Facades\Log;
 
 class NotifyService
 {
-    public function notifyTransfer(Transaction $transaction): bool
+
+    /**
+     * Try o notify payee
+     *
+     * @param Transaction $transaction
+     * @return void
+     */
+    public function notifyTransfer(Transaction $transaction)
     {
         try {
             $request = Http::acceptJson()
