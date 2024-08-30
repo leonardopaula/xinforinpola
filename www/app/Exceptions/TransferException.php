@@ -6,6 +6,7 @@ use App\Enums\ErrorCodes;
 use Exception;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 
 class TransferException extends Exception
 {
@@ -28,7 +29,7 @@ class TransferException extends Exception
      */
     public function report()
     {
-        // TODO: report error
+        Log::error($this->message);
     }
 
     /**

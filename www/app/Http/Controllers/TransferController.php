@@ -19,7 +19,20 @@ class TransferController extends Controller
 
     public function transfer(TransferPostRequest $request)
     {
-        $this->transferService->dispatchTransaction($request);
+        try {
+            $this->transferService->dispatchTransaction($request);
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'code' => 0,
+                'message' => 'An error occurred'
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Transaction successfully executed'
+        ], Response::HTTP_OK);
     }
 
     public function clearCache()
