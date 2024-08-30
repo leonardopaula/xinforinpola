@@ -45,5 +45,7 @@ class TransactionRepository implements TransactionRepositoryInterface
         $this->transaction->success = true;
         $this->transaction->message = "Transaction successfully executed";
         $this->transaction->save();
+
+        return $this->transaction;
     }
 }

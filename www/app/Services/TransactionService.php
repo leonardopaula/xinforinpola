@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Enums\ErrorCodes;
 use App\Exceptions\TransferException;
+use App\Jobs\TransferNotifyJob;
 use App\Models\User;
 use App\Repositories\Transaction\TransactionRepository;
 use App\Repositories\Wallet\WalletRepository;
@@ -50,7 +51,9 @@ class TransactionService
 
                 $payeeWallet->balance = $payeeWallet->balance + $value;
                 $payeeWallet->save();
-                $this->transactionRepository->success();
+                $transaction = $this->transactionRepository->success();
+
+                TransferNotifyJob::dispatch($transaction);
             }
         });
 
